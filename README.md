@@ -1,4 +1,3 @@
-# FREmu
 <h1 align="center">
 <img src="https://github.com/astrobai/fremu/blob/master/fremu.png" width="700">
 </h1><br>
