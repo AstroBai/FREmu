@@ -34,7 +34,7 @@ boost_factor = emu.get_boost(k=k_values, z=0.5)
 
 ## Documentation
 
-You can find more documentation and examples about $\texttt{FREmu}$ on the [GitHub repository](https://github.com/astrobai/fremu).
+You can find the documentation of the emulator here: [FREmu documentation](https://astrobai.github.io/codes/fremu).
 
 ## Contributing
 
