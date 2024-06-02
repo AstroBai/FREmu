@@ -6,6 +6,10 @@ from scipy.interpolate import CubicSpline
 import os
 import camb
 
+
+#=====================================================================================================
+#=====================================================================================================
+# neural network
 class BkANN(nn.Module):
     def __init__(self, input_size, hidden_size1, output_size):
         super(BkANN, self).__init__()
@@ -22,38 +26,35 @@ class BkANN(nn.Module):
 class emulator:
     def __init__(self):
         
-        module_path = os.path.dirname(__file__)
-        cache_path = os.path.join(module_path, 'cache') 
-        
-        self.ks = np.load(os.path.join(cache_path, 'k.npy'))
+        self.ks = np.load('./cache/k.npy')
         self.ks = self.ks[:250]
         
         self.scaler = None
-        with open(os.path.join(cache_path,'scaler.pkl'), 'rb') as scaler_file:
+        with open('./cache/scaler.pkl', 'rb') as scaler_file:
             self.scaler = pickle.load(scaler_file)
         
         self.pc = {}
         self.mean = {}
         
         for z in [0.0, 0.5, 1.0, 2.0, 3.0]:
-            pc = np.load(os.path.join(cache_path,f'pc_{z:.1f}.npy'))
+            pc = np.load(f'./cache/pc_{z:.1f}.npy')
             self.mean[z] = pc[0, :]
             self.pc[z] = pc[1:, :]
-        n_hidd = 650
-        n_out = 30
+        n_hidd = 1020
+        n_out = 24
         self.model0 = BkANN(7, n_hidd, n_out)
         self.model05 = BkANN(7, n_hidd, n_out)
         self.model1 = BkANN(7, n_hidd, n_out)
         self.model2 = BkANN(7, n_hidd, n_out)
         self.model3 = BkANN(7, n_hidd, n_out)
             
-        self.model0.load_state_dict(torch.load(os.path.join(cache_path,'pc_ann_0.0.pth')))
-        self.model05.load_state_dict(torch.load(os.path.join(cache_path,'pc_ann_0.5.pth')))
-        self.model1.load_state_dict(torch.load(os.path.join(cache_path,'pc_ann_1.0.pth')))
-        self.model2.load_state_dict(torch.load(os.path.join(cache_path,'pc_ann_2.0.pth')))
-        self.model3.load_state_dict(torch.load(os.path.join(cache_path,'pc_ann_3.0.pth')))
+        self.model0.load_state_dict(torch.load('./cache/pc_ann_0.0.pth'))
+        self.model05.load_state_dict(torch.load('./cache/pc_ann_0.5.pth'))
+        self.model1.load_state_dict(torch.load('./cache/pc_ann_1.0.pth'))
+        self.model2.load_state_dict(torch.load('./cache/pc_ann_2.0.pth'))
+        self.model3.load_state_dict(torch.load('./cache/pc_ann_3.0.pth'))
         
-        self.sigma = np.load(os.path.join(cache_path,'sigma.npy'))
+        self.sigma = np.load('./cache/sigma.npy')
         
     def get_error(self, k=None):      
         if k is None:
@@ -77,7 +78,7 @@ class emulator:
         pars.set_cosmology(H0=h * 100, ombh2=Ob * h**2, omch2=(Om-Ob) * h**2, mnu=0, omk=0, num_massive_neutrinos=3)
         pars.InitPower.set_params(ns=ns)
         #pars.NonLinear = camb.model.NonLinear_both
-        pars.NonLinearModel.set_params(halofit_version='mead2020_feedback')
+        pars.NonLinearModel.set_params(halofit_version='mead2020')
         get_transfer = True
         pars.set_matter_power(redshifts=[0], kmax=10.0, nonlinear=False)
         initial_scalar_amp = 1e-9
