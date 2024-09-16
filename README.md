@@ -2,7 +2,7 @@
 <img src="https://github.com/astrobai/fremu/blob/master/fremu.png" width="700">
 </h1><br>
 
-**Note: This is not the latest version of FREmu, for the latest one, please contact me through e-mail: astrobaijc@gmail.com**
+**Please notice: This is not the latest version of FREmu, for the latest one, please contact me through e-mail: astrobaijc@gmail.com**
 
 $\texttt{FREmu}$ offers fast and accurate predictions of non-linear power spectra for the specific Hu-Sawicki $f(R)$ gravity model. $\texttt{FREmu}$ employs principal component analysis and artificial neural networks to establish a parameter-to-power-spectrum map, with training data sourced from the Quijote-MG simulation suite. With a parameter space encompassing 7 dimensions, including $\Omega_m$, $\Omega_b$, $h$, $n_s$, $\sigma_8$, $M_{\nu}$, and $f_{R_0}$, the emulator achieves an accuracy better than 5% for the majority of cases and it's proved highly efficient for parameter constraints.
 
