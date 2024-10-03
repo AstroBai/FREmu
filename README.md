@@ -4,7 +4,7 @@
 
 **!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!**
 
-**Please notice: This is not the latest version of FREmu, for the latest one, please contact me through e-mail: astrobaijc@gmail.com**
+**Please notice: This is not the latest version of FREmu, to get the latest one, please contact me through e-mail: astrobaijc@gmail.com. The new version of FREmu can be extended to large scales, which is critical for real data analyses.**
 
 **!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!**
 
